@@ -1,13 +1,18 @@
-🚀 Real-World Project: Multi-User Expense Tracker
-We'll build a Multi-User Expense Tracker using Context API and Bootstrap for design. This app will allow users to:
+# 🚀 Real-World Project: Multi-User Expense Tracker
 
-✅ Add expenses (title, amount, category)
-✅ Delete expenses
-✅ Filter expenses (by category)
-✅ Track total spending
-✅ Persist data in localStorage
+We'll build a **Multi-User Expense Tracker** using **Context API** for state management and **Bootstrap** for design. This application will allow users to:
 
-📌 Tech Stack
-React (with Context API for global state management)
-Bootstrap (for styling)
-LocalStorage (to persist expenses across page reloads)
+- ✅ Add expenses (title, amount, category)  
+- ✅ Delete expenses  
+- ✅ Filter expenses by category  
+- ✅ Track total spending  
+- ✅ Persist data in `localStorage`  
+
+---
+
+## 📌 Tech Stack  
+- **React** (with Context API for global state management)  
+- **Bootstrap** (for styling)  
+- **LocalStorage** (to persist expenses across page reloads)  
+
+---
