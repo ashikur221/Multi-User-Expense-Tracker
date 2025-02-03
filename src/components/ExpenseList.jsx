@@ -1,9 +1,10 @@
-import  { useContext } from 'react';
+import  { useContext, useState } from 'react';
 import { ExpenseContext } from '../contexts/ExpenseContext';
+import EditExpense from './EditExpense';
 
 const ExpenseList = () => {
     const {expenses, deleteExpense, filter}=useContext(ExpenseContext);
-
+    const [editingExpense, setEditingExpense]=useState(null);
     // Filtered expenses 
     const filteredExpenses = filter === "All" ? expenses 
     : 
@@ -20,7 +21,10 @@ const ExpenseList = () => {
                                     {expense.title} - ${expense.amount} ({expense.category})
                                 </span>
 
-                                <button className='btn btn-danger btn-sm' onClick={() => deleteExpense(expense.id)}>Delete</button>
+                                <div className="">
+                                    <button className="btn btn-warning btn-sm me-2" onClick={()=>setEditingExpense(expense)}>Edit</button>
+                                    <button className='btn btn-danger btn-sm' onClick={() => deleteExpense(expense.id)}>Delete</button>
+                                </div>
                             </li>
                         ))
                    ):
@@ -29,6 +33,9 @@ const ExpenseList = () => {
                    )
                 }
             </ul>
+
+            {/* Show edit modal if an expense is selected for editing  */}
+            {editingExpense && <EditExpense expense={editingExpense} onClose={()=>setEditingExpense(null)}/>}
             
         </div>
     );

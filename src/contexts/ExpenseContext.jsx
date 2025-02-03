@@ -4,6 +4,19 @@ export const ExpenseContext = createContext();
 
 export const ExpenseProvider = ({ children }) => {
 
+    const [darkMode, setDarkMode] = useState(() => {
+        return JSON.parse(localStorage.getItem("darkMode")) || false;
+    });
+
+    useEffect(() => {
+        localStorage.setItem("darkMode", JSON.stringify(darkMode));
+    }, [darkMode]);
+
+    const toggleDarkMode = () => {
+        setDarkMode(prevMode => !prevMode);
+    }
+
+
     const [expenses, setExpenses] = useState(() => {
         return JSON.parse(localStorage.getItem("expenses")) || [];
     });
@@ -30,11 +43,22 @@ export const ExpenseProvider = ({ children }) => {
         return filteredExpenses.reduce((total, expense) => total + expense.amount, 0);
     };
 
-    const data = { expenses, addExpense, deleteExpense, filter, setFilter, getTotalSpending };
+    const editExpense = (id, updatedTitle, updatedAmount, updatedCategory) => {
+        setExpenses(expenses.map(expense =>
+
+            expense.id === id ? { ...expense, title: updatedTitle, amount: parseFloat(updatedAmount), category: updatedCategory }
+                :
+                expense
+        ));
+    };
+
+    const data = { expenses, addExpense, deleteExpense, filter, setFilter, getTotalSpending, editExpense, darkMode, toggleDarkMode };
 
     return (
         <ExpenseContext.Provider value={data}>
-            {children}
+            <div className={darkMode ? "dark-mode" : ""}>
+                {children}
+            </div>
         </ExpenseContext.Provider>
     )
 }
